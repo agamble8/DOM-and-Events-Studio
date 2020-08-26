@@ -46,6 +46,8 @@ function init () {
         flightStatus.innerHTML = 'The shuttle has landed.';
         backgroundCol.style.backgroundColor = 'green';
         shuttleHeight.innerHTML = 0;
+        rocket.style.left = "0px";
+        rocket.style.bottom = "0px";
     })
 
     abortButton.addEventListener('click', function() {
@@ -54,19 +56,25 @@ function init () {
             flightStatus.innerHTML = 'Mission aborted.';
             backgroundCol.style.backgroundColor = 'green';
             shuttleHeight.innerHTML = 0;
+            rocket.style.left = "0px";
+            rocket.style.bottom = "0px";
         }
     })
 
     leftButton.addEventListener('click', function() {
-        movement = parseInt(rocket.style.left) - 10 + 'px';
-        rocket.style.left = movement;
+        if (parseInt(rocket.style.left) > -20) {
+            movement = parseInt(rocket.style.left) - 10 + 'px';
+            rocket.style.left = movement;
+        }
     })
 
     rightButton.addEventListener('click', function() {
-        movement = parseInt(rocket.style.left) + 10 + 'px';
-        rocket.style.left = movement;
+        let maxWidth = (backgroundCol.clientWidth - 60);    
+        if (parseInt(rocket.style.left) < maxWidth) {
+            movement = parseInt(rocket.style.left) + 10 + 'px';
+            rocket.style.left = movement; 
+        }
     })
-
 
     downButton.addEventListener('click', function () {
         if (shuttleHeight.innerHTML > 0) {
